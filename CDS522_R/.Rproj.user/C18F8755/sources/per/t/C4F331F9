@@ -1,0 +1,27 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1603938969796.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "356685696",
+    "id" : "C4F331F9",
+    "lastKnownWriteTime" : 1603945627,
+    "last_content_update" : 1603945627009,
+    "path" : "C:/Users/Darren Lee/Jupyter_Notebook/MS_DSA/CDS522_2021/CDS522_R/src/textminepipe.Rmd",
+    "project_path" : "src/textminepipe.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "301,0",
+        "scrollLine" : "298",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

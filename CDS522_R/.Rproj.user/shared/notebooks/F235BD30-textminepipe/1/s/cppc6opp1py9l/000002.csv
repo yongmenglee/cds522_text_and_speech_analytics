@@ -1,0 +1,5 @@
+"0","# remove stopwords using the standard list in tm"
+"0","docs <- tm_map(docs, removeWords, stopwords(""english""))"
+"0","writeLines(as.character(docs[[docIndex]]))"
+"1","love shines   great illustrated kidsâ€™ book  read   little girl makes chores fun  easy     fantastic addition   little oneâ€™s free bed time story collection 
+"

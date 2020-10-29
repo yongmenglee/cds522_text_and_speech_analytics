@@ -1,0 +1,8 @@
+"0","# load wordcloud package"
+"0","library(wordcloud)"
+"0",""
+"0","# setting the seed before each plot to ensure consistent look for clouds"
+"0","set.seed(32)"
+"0",""
+"0","# limit words by specifying min frequency"
+"0","wordcloud(names(freq.tr), freq.tr, min.freq = 3, scale = c(3.5, 0.25))"

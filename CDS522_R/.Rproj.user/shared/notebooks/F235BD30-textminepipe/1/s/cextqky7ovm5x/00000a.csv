@@ -1,0 +1,3 @@
+"0",""
+"0","# limit words by specifying min frequency (with color)"
+"0","wordcloud(names(freq.tr), freq.tr, min.freq = 3, scale = c(3.5, 0.5), colors = brewer.pal(6, ""Dark2""))"

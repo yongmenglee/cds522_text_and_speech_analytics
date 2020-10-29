@@ -1,0 +1,10 @@
+"0","library(SnowballC)"
+"2","package ‘SnowballC’ was built under R version 3.6.3"
+"0","# duplicate object for testing"
+"0","docs.stem <- docs"
+"0",""
+"0","# stem the corpus"
+"0","docs.stem <- tm_map(docs.stem, stemDocument)"
+"0","writeLines(as.character(docs.stem[[2]]))"
+"1","read warm tale camaraderi affect set wild beauti savannah free illustr kid book ginger giraff use long neck save anim blaze forest fire follow jungl path meet yet anoth adventur
+"

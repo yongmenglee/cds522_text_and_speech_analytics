@@ -1,0 +1,6 @@
+"0","# Create toSpace content transformer"
+"0","toSpace <- content_transformer("
+"0","  function(x, pattern) {"
+"0","    return (gsub(pattern, "" "", x))"
+"0","  }"
+"0",")"

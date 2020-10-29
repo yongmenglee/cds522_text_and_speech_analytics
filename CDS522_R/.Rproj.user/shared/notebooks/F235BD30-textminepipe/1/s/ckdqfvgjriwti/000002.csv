@@ -1,0 +1,41 @@
+"0","# Lemmatization"
+"0","# load textstem package"
+"0","library(textstem)"
+"2","package ‘textstem’ was built under R version 3.6.3"
+"2","Loading required package: koRpus.lang.en
+"
+"2","package ‘koRpus.lang.en’ was built under R version 3.6.3"
+"2","Loading required package: koRpus
+"
+"2","package ‘koRpus’ was built under R version 3.6.3"
+"2","Loading required package: sylly
+"
+"2","package ‘sylly’ was built under R version 3.6.3"
+"2","Registered S3 method overwritten by 'data.table':
+  method           from
+  print.data.table     
+"
+"2","For information on available language packages for 'koRpus', run
+
+  available.koRpus.lang()
+
+and see ?install.koRpus.lang()
+
+"
+"2","
+Attaching package: ‘koRpus’
+
+"
+"2","The following object is masked from ‘package:tm’:
+
+    readTagged
+
+"
+"0","# duplicate object for testing"
+"0","docs.lemma <- docs"
+"0",""
+"0","# lemmatize the corpus (require textstem)"
+"0","docs.lemma <- tm_map(docs.lemma, lemmatize_strings)"
+"0","writeLines(as.character(docs.lemma[[2]]))"
+"1","read warm tale camaraderie affection set wild beautiful savannah free illustrate kid book ginger giraffe use long neck save animal blaze forest fire follow jungle path meet yet another adventure
+"

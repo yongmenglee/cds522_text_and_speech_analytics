@@ -1,0 +1,30 @@
+"0","# Create document term matrix with term reduction"
+"0","# - Include only words that occur in 2-8 documents. "
+"0","# - enforce lower & upper limit to the length of words (4-20 characters)"
+"0","dtm.tr <- DocumentTermMatrix("
+"0","  docs.lemma, control = list("
+"0","    wordLengths = c(4,20), bounds = list(global = c(2,8))"
+"0","  )"
+"0",")"
+"0",""
+"0","dtm.tr"
+"1","<<DocumentTermMatrix (documents: 10, terms: 29)>>
+"
+"1","Non-/sparse entries: 81/209
+"
+"1","Sparsity           : 72%
+"
+"1","Maximal term length: 12
+"
+"1","Weighting          : term frequency (tf)
+"
+"0","# Find frequent terms"
+"0","findFreqTerms(dtm.tr, lowfreq = 5)"
+"1","[1]"
+"1"," ""book""  "
+"1"," ""free""  "
+"1"," ""read""  "
+"1"," ""little"""
+"1"," ""story"" "
+"1","
+"

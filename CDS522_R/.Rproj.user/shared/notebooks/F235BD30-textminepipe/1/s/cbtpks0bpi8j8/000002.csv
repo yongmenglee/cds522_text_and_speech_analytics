@@ -1,0 +1,6 @@
+"0","# Load package"
+"0","library(tm)"
+"2","package ‘tm’ was built under R version 3.6.3"
+"2","Loading required package: NLP
+"
+"2","package ‘NLP’ was built under R version 3.6.3"

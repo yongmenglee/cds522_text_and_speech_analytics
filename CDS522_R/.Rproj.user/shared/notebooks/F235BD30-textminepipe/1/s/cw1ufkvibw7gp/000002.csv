@@ -1,0 +1,7 @@
+"0","# select a doc"
+"0","docIndex <- 3"
+"0",""
+"0","# before transformation"
+"0","writeLines(as.character(docs[[docIndex]]))"
+"1","Love shines through this great illustrated kidsâ€™ book . Read how a little girl makes chores fun and easy to do. A  fantastic addition to your little oneâ€™s free bed time story collection. 
+"

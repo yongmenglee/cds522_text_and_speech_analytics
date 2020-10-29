@@ -1,0 +1,5 @@
+"0","# remove digits in corpus"
+"0","docs <- tm_map(docs, removeNumbers)"
+"0","writeLines(as.character(docs[[docIndex]]))"
+"1","love shines through this great illustrated kidsâ€™ book  read how a little girl makes chores fun and easy to do a  fantastic addition to your little oneâ€™s free bed time story collection 
+"

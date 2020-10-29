@@ -1,0 +1,4 @@
+"0","# Inspect a particular document (e.g. the 1st doc)"
+"0","writeLines(as.character(docs[[1]]))"
+"1","Was it just another game of hide and seek? No. It was not. First she fell into a deep, dark hole in the ground and then they found a treasure. Did it end there? No! It did not. Read more about this thrilling adventure of Sally and friends in this free illustrated kidsâ€™ book. The fun never ends when Sallyâ€™s around! 
+"
