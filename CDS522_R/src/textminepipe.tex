@@ -1,0 +1,1130 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Text Mining Pipeline},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Text Mining Pipeline}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+A simple R project adapted for self-study purpose.
+
+\hypertarget{overview}{%
+\subsection{Overview}\label{overview}}
+
+\begin{itemize}
+\tightlist
+\item
+  Section 1: Create R Project
+\item
+  Section 2: Loading Data into R
+
+  \begin{itemize}
+  \tightlist
+  \item
+    2-1: Text File
+  \end{itemize}
+\item
+  Section 3: Text Pre-processing
+\item
+  Section 4: Text Normalization
+
+  \begin{itemize}
+  \tightlist
+  \item
+    4-1: Stemming
+  \item
+    4-2: Lemmatization
+  \end{itemize}
+\item
+  Section 5: Text Representation
+
+  \begin{itemize}
+  \tightlist
+  \item
+    5-1: Document Term Matrix (DTM)
+  \end{itemize}
+\item
+  Section 6: Text Mining
+
+  \begin{itemize}
+  \tightlist
+  \item
+    6-1: Word Frequency
+  \item
+    6-2: Term Correlation
+  \end{itemize}
+\item
+  Section 7: Simple Graphics
+
+  \begin{itemize}
+  \tightlist
+  \item
+    7-1: Histogram
+  \item
+    7-2: Word Cloud
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-1-create-r-project}{%
+\section{Section 1: Create R Project}\label{section-1-create-r-project}}
+
+\hypertarget{create-a-new-project-in-rstudio}{%
+\subsubsection{Create a New Project in
+RStudio}\label{create-a-new-project-in-rstudio}}
+
+The steps to create a new project in R is specified as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click the \textbf{File \textgreater{} New Project} from the top menu.
+\item
+  Click \textbf{New Directory}.
+\item
+  Click \textbf{New Project}.
+\item
+  Enter the directory name to store your project,
+  e.g.~``simpleTextMining''.
+\item
+  \emph{(optional)} Place the project under your selected subdirectory.
+\item
+  Click \textbf{Create Project} button.
+\end{enumerate}
+
+\hypertarget{create-subdirectories-for-project}{%
+\subsubsection{Create Subdirectories for
+Project}\label{create-subdirectories-for-project}}
+
+The subfolders created for this project, together with the files in
+these subfolders are as listed below:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{doc}: text documents associated with the project.
+\item
+  \textbf{data}: raw data and metadata.
+\item
+  \textbf{output}: files generated during cleanup and analysis.
+\item
+  \textbf{src}: source for the project's scripts and programs
+\item
+  \textbf{bin}: programs brought in from elsewhere or compiled locally
+\end{enumerate}
+
+Finally, all files are named to reflect their content or function.
+
+\hypertarget{create-r-script-file}{%
+\subsubsection{Create R Script File}\label{create-r-script-file}}
+
+Create an R Script file to save your codes.
+
+Write the code you want to run directly in an .R script file, and then
+running the selected lines (keyboard shortcut: \textbf{Ctrl + Enter}) in
+the interactive R console.
+
+Save your R Script file in the \textbf{src} folder.
+
+\hypertarget{check-working-directory}{%
+\subsubsection{Check Working Directory}\label{check-working-directory}}
+
+When you are working with R using a Project environment, the workspace
+will be automatically loaded when you open the project. To change the
+working directory, call \texttt{setwd()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Get current working directory}
+\KeywordTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "C:/Users/Darren Lee/Jupyter_Notebook/MS_DSA/CDS522_2021/CDS522_R/src"
+\end{verbatim}
+
+\hypertarget{load-r-packages}{%
+\subsubsection{Load R Packages}\label{load-r-packages}}
+
+Call \texttt{library(\{package\_name\})} to load the package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Load package}
+\KeywordTok{library}\NormalTok{(tm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'tm' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: NLP
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'NLP' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-2-loading-data-into-r}{%
+\section{Section 2: Loading Data into
+R}\label{section-2-loading-data-into-r}}
+
+\hypertarget{load-and-view-data-in-r}{%
+\subsubsection{Load and View Data in R}\label{load-and-view-data-in-r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create Corpus from .txt}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{Corpus}\NormalTok{(}\KeywordTok{DirSource}\NormalTok{(}\StringTok{"../data"}\NormalTok{))}
+
+\CommentTok{# View Corpus Information}
+\KeywordTok{print}\NormalTok{(docs)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<SimpleCorpus>>
+## Metadata:  corpus specific: 1, document level (indexed): 0
+## Content:  documents: 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\KeywordTok{summary}\NormalTok{(docs))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                        Length Class             Mode
+## childrenstories_01.txt 2      PlainTextDocument list
+## childrenstories_02.txt 2      PlainTextDocument list
+## childrenstories_03.txt 2      PlainTextDocument list
+## childrenstories_04.txt 2      PlainTextDocument list
+## childrenstories_05.txt 2      PlainTextDocument list
+## childrenstories_06.txt 2      PlainTextDocument list
+## childrenstories_07.txt 2      PlainTextDocument list
+## childrenstories_08.txt 2      PlainTextDocument list
+## childrenstories_09.txt 2      PlainTextDocument list
+## childrenstories_10.txt 2      PlainTextDocument list
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cat}\NormalTok{(}\StringTok{"Welcome to this simple text mining project"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Welcome to this simple text mining project
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{require}\NormalTok{(tm)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{inspect-document-contents}{%
+\subsubsection{Inspect Document
+Contents}\label{inspect-document-contents}}
+
+You can examine the contents of a particular document (e.g.~the first
+document)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Inspect a particular document (e.g. the 1st doc)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[}\DecValTok{1}\NormalTok{]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Was it just another game of hide and seek? No. It was not. First she fell into a deep, dark hole in the ground and then they found a treasure. Did it end there? No! It did not. Read more about this thrilling adventure of Sally and friends in this free illustrated kidsâ€™ book. The fun never ends when Sallyâ€™s around!
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-3-text-pre-processing}{%
+\section{Section 3: Text
+Pre-processing}\label{section-3-text-pre-processing}}
+
+\hypertarget{data-cleaning-using-tm-package}{%
+\subsubsection{\texorpdfstring{Data Cleaning using \texttt{tm}
+Package}{Data Cleaning using tm Package}}\label{data-cleaning-using-tm-package}}
+
+Data cleaning is an important step in text analysis.
+
+It could take up to few cycles to achieve a mature cleaning pipeline as
+new issues are often found during the process of cleaning.
+
+\texttt{tm} package offers a number of text transformation functions.
+Call \texttt{getTransformation()} to list these transformation
+functions.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# checkout tm package transformation functions}
+\KeywordTok{getTransformations}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "removeNumbers"     "removePunctuation" "removeWords"      
+## [4] "stemDocument"      "stripWhitespace"
+\end{verbatim}
+
+\hypertarget{create-a-new-function-tospace}{%
+\subsubsection{\texorpdfstring{Create A New Function:
+\texttt{toSpace}}{Create A New Function: toSpace}}\label{create-a-new-function-tospace}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create toSpace content transformer}
+\NormalTok{toSpace <-}\StringTok{ }\KeywordTok{content_transformer}\NormalTok{(}
+  \ControlFlowTok{function}\NormalTok{(x, pattern) \{}
+    \KeywordTok{return}\NormalTok{ (}\KeywordTok{gsub}\NormalTok{(pattern, }\StringTok{" "}\NormalTok{, x))}
+\NormalTok{  \}}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The description of the parameters and variables in the new function:
+\texttt{toSpace}:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gsub()}: replace all occurrences of a pattern.
+\item
+  \texttt{pattern}: a pattern to search for (assumed to be a regex)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    an additional argument \texttt{fixed\ =\ TRUE} can be specified to
+    look for a pattern without using regex.
+  \end{itemize}
+\item
+  \texttt{replacement}: a character string to replace the occurrence (or
+  occurrences for \texttt{gsub}) of pattern.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Here, \texttt{replacement\ =\ "\ "}
+  \end{itemize}
+\item
+  \texttt{x}: a character vector to search for pattern. Each element
+  will be searched separately.
+\end{itemize}
+
+\hypertarget{before-transformation}{%
+\subsubsection{Before Transformation}\label{before-transformation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# select a doc}
+\NormalTok{docIndex <-}\StringTok{ }\DecValTok{3}
+
+\CommentTok{# before transformation}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Love shines through this great illustrated kidsâ€™ book . Read how a little girl makes chores fun and easy to do. A  fantastic addition to your little oneâ€™s free bed time story collection.
+\end{verbatim}
+
+\hypertarget{replace-special-punctuation-with-space}{%
+\subsubsection{Replace Special Punctuation with
+Space}\label{replace-special-punctuation-with-space}}
+
+Call the helper function \texttt{toSpace()} as previously defined.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# eliminate hyphen using toSpace content transformation}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, toSpace, }\StringTok{"-"}\NormalTok{)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Love shines through this great illustrated kidsâ€™ book . Read how a little girl makes chores fun and easy to do. A  fantastic addition to your little oneâ€™s free bed time story collection.
+\end{verbatim}
+
+\hypertarget{remove-punctuation}{%
+\subsubsection{Remove Punctuation}\label{remove-punctuation}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# apply removePunctuation}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removePunctuation)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Love shines through this great illustrated kidsâ€™ book  Read how a little girl makes chores fun and easy to do A  fantastic addition to your little oneâ€™s free bed time story collection
+\end{verbatim}
+
+\hypertarget{convert-to-lower-case}{%
+\subsubsection{Convert to Lower Case}\label{convert-to-lower-case}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# convert corpus to lower case}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, }\KeywordTok{content_transformer}\NormalTok{(tolower))}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## love shines through this great illustrated kidsâ€™ book  read how a little girl makes chores fun and easy to do a  fantastic addition to your little oneâ€™s free bed time story collection
+\end{verbatim}
+
+\hypertarget{remove-numbers}{%
+\subsubsection{Remove Numbers}\label{remove-numbers}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# remove digits in corpus}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removeNumbers)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## love shines through this great illustrated kidsâ€™ book  read how a little girl makes chores fun and easy to do a  fantastic addition to your little oneâ€™s free bed time story collection
+\end{verbatim}
+
+\hypertarget{remove-stopwords}{%
+\subsubsection{Remove Stopwords}\label{remove-stopwords}}
+
+Example of stopwords recognized by the \texttt{tm} package includes:
+
+\begin{itemize}
+\tightlist
+\item
+  articles: a, an, the
+\item
+  conjuctions: and, or, but
+\item
+  common verbs: is
+\item
+  qualifiers: yet, however
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# remove stopwords using the standard list in tm}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, removeWords, }\KeywordTok{stopwords}\NormalTok{(}\StringTok{"english"}\NormalTok{))}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## love shines   great illustrated kidsâ€™ book  read   little girl makes chores fun  easy     fantastic addition   little oneâ€™s free bed time story collection
+\end{verbatim}
+
+\hypertarget{strip-extra-whitespace}{%
+\subsubsection{Strip Extra Whitespace}\label{strip-extra-whitespace}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# remove whitespace optional to remove extra whitespace}
+\NormalTok{docs <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs, stripWhitespace)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs[[docIndex]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## love shines great illustrated kidsâ€™ book read little girl makes chores fun easy fantastic addition little oneâ€™s free bed time story collection
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-4-text-normalization}{%
+\section{Section 4: Text
+Normalization}\label{section-4-text-normalization}}
+
+\hypertarget{stemming}{%
+\subsection{4-1: Stemming}\label{stemming}}
+
+\textbf{Stemming} is the process of reducing related words to their
+common root. For example:
+
+\begin{quote}
+offer, offered, offering \(\rightarrow\) offer
+\end{quote}
+
+Simple stemming algorithms (in \texttt{tm} package) simply chop off the
+ends of the words.
+
+To perform stemming, pass function \texttt{stemDocument()} (from
+\texttt{SnowballC} package) to \texttt{tm\_map()} of \texttt{tm}
+package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(SnowballC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'SnowballC' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# duplicate object for testing}
+\NormalTok{docs.stem <-}\StringTok{ }\NormalTok{docs}
+
+\CommentTok{# stem the corpus}
+\NormalTok{docs.stem <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs.stem, stemDocument)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs.stem[[}\DecValTok{2}\NormalTok{]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## read warm tale camaraderi affect set wild beauti savannah free illustr kid book ginger giraff use long neck save anim blaze forest fire follow jungl path meet yet anoth adventur
+\end{verbatim}
+
+\hypertarget{lemmatization}{%
+\subsection{4-2: Lemmatization}\label{lemmatization}}
+
+\textbf{Lemmatization} is the process of grouping together the inflected
+forms of a word. It is much more sophisticated as compared to stemming.
+
+The resulting \emph{lemma} can be analyzed as a single item.
+
+To perform lemmatization, pass function \texttt{lemmatize\_string()}
+(from \texttt{textstem} package) to \texttt{tm\_map()} of \texttt{tm}
+package.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Lemmatization}
+\CommentTok{# load textstem package}
+\KeywordTok{library}\NormalTok{(textstem)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'textstem' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: koRpus.lang.en
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'koRpus.lang.en' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: koRpus
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'koRpus' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: sylly
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: package 'sylly' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## For information on available language packages for 'koRpus', run
+## 
+##   available.koRpus.lang()
+## 
+## and see ?install.koRpus.lang()
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'koRpus'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:tm':
+## 
+##     readTagged
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# duplicate object for testing}
+\NormalTok{docs.lemma <-}\StringTok{ }\NormalTok{docs}
+
+\CommentTok{# lemmatize the corpus (require textstem)}
+\NormalTok{docs.lemma <-}\StringTok{ }\KeywordTok{tm_map}\NormalTok{(docs.lemma, lemmatize_strings)}
+\KeywordTok{writeLines}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(docs.lemma[[}\DecValTok{2}\NormalTok{]]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## read warm tale camaraderie affection set wild beautiful savannah free illustrate kid book ginger giraffe use long neck save animal blaze forest fire follow jungle path meet yet another adventure
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-5-text-representation}{%
+\section{Section 5: Text
+Representation}\label{section-5-text-representation}}
+
+\hypertarget{document-term-matrix-dtm}{%
+\subsection{5-1: Document Term Matrix
+(DTM)}\label{document-term-matrix-dtm}}
+
+\textbf{Document Term Matrix} (or \textbf{DTM} for short) is a matrix
+that lists all occurrences of words (column) in the corpus, by document
+(row).
+
+\begin{itemize}
+\item
+  A word that appears in a particular document will have its respective
+  matrix entry in the corresponding row and column assign to 1, else 0.
+\item
+  A word that appears \emph{n} times in a document will be recorded as
+  \texttt{n} in the respective matrix entry.
+\end{itemize}
+
+\hypertarget{example}{%
+\paragraph{Example}\label{example}}
+
+We have the two documents, \emph{Doc1} and \emph{Doc2}, with the
+following content:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Doc1}: goats are happy
+\item
+  \emph{Doc2}: goats are fat
+\end{itemize}
+
+The corresponding DTM will look like:
+
+\begin{longtable}[]{@{}lllll@{}}
+\toprule
+& goats & are & happy & fat\tabularnewline
+\midrule
+\endhead
+Doc1 & 1 & 1 & 1 & 0\tabularnewline
+Doc2 & 1 & 1 & 0 & 1\tabularnewline
+\bottomrule
+\end{longtable}
+
+DTM can become very huge, depending on the corpus. The dimension of the
+DTM is the \textbf{\# of documents} multiplied by the \textbf{\# of
+words in the corpus}. \textbf{Sparsity} often happens since majority of
+words only appear in few documents.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Document Term Matrix: DTM}
+
+\CommentTok{# Create Document Term Matrix}
+\NormalTok{dtm <-}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(docs.lemma)}
+
+\CommentTok{# View summary of document term matrix}
+\NormalTok{dtm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 10, terms: 163)>>
+## Non-/sparse entries: 219/1411
+## Sparsity           : 87%
+## Maximal term length: 12
+## Weighting          : term frequency (tf)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Inspect document term matrix}
+\KeywordTok{inspect}\NormalTok{(dtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 10, terms: 163)>>
+## Non-/sparse entries: 219/1411
+## Sparsity           : 87%
+## Maximal term length: 12
+## Weighting          : term frequency (tf)
+## Sample             :
+##                         Terms
+## Docs                     adventure book find free fun illustrate little read
+##   childrenstories_01.txt         1    1    1    1   1          1      0    1
+##   childrenstories_02.txt         1    1    0    1   0          1      0    1
+##   childrenstories_03.txt         0    1    0    1   1          1      2    1
+##   childrenstories_04.txt         0    0    0    0   0          0      0    0
+##   childrenstories_05.txt         0    1    0    0   0          0      0    0
+##   childrenstories_06.txt         1    1    0    1   0          0      1    0
+##   childrenstories_07.txt         0    0    0    0   1          0      0    1
+##   childrenstories_08.txt         0    1    0    2   0          0      0    2
+##   childrenstories_09.txt         0    0    2    1   0          0      1    1
+##   childrenstories_10.txt         0    1    0    2   0          0      2    2
+##                         Terms
+## Docs                     story time
+##   childrenstories_01.txt     0    0
+##   childrenstories_02.txt     0    0
+##   childrenstories_03.txt     1    1
+##   childrenstories_04.txt     0    0
+##   childrenstories_05.txt     0    0
+##   childrenstories_06.txt     1    1
+##   childrenstories_07.txt     2    1
+##   childrenstories_08.txt     1    0
+##   childrenstories_09.txt     2    0
+##   childrenstories_10.txt     0    0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Inspect document term matrix by specifying rows and columns}
+\KeywordTok{inspect}\NormalTok{(dtm[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DecValTok{11}\OperatorTok{:}\DecValTok{20}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 5, terms: 10)>>
+## Non-/sparse entries: 17/33
+## Sparsity           : 66%
+## Maximal term length: 10
+## Weighting          : term frequency (tf)
+## Sample             :
+##                         Terms
+## Docs                     free friend fun game grind hide hole illustrate just
+##   childrenstories_01.txt    1      1   1    1     1    1    1          1    1
+##   childrenstories_02.txt    1      0   0    0     0    0    0          1    0
+##   childrenstories_03.txt    1      0   1    0     0    0    0          1    0
+##   childrenstories_04.txt    0      0   0    0     0    0    0          0    0
+##   childrenstories_05.txt    0      1   0    0     0    0    0          0    0
+##                         Terms
+## Docs                     kidsâ\200\231
+##   childrenstories_01.txt       1
+##   childrenstories_02.txt       0
+##   childrenstories_03.txt       1
+##   childrenstories_04.txt       0
+##   childrenstories_05.txt       0
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-6-text-mining}{%
+\section{Section 6: Text Mining}\label{section-6-text-mining}}
+
+\hypertarget{words-frequency}{%
+\subsection{6-1: Words Frequency}\label{words-frequency}}
+
+When constructing the DTM, the corpus of text is converted into a
+\textbf{mathematical object} that can be analyzed and manipulated using
+quantitative techniques of matrix algebra.
+
+To get the frequency of each word in the corpus, we can sum over all
+rows based on the columns.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# get frequency of each word}
+\NormalTok{freq <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(dtm))}
+
+\CommentTok{# check dimension of frequency (number of words/columns)}
+\KeywordTok{length}\NormalTok{(freq)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 163
+\end{verbatim}
+
+\hypertarget{check-frequent-vs.-infrequent-words}{%
+\subsubsection{Check Frequent vs.~Infrequent
+Words}\label{check-frequent-vs.-infrequent-words}}
+
+We can also sort the words (\texttt{freq}) in descending order based on
+term count.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create sort order}
+\NormalTok{ord <-}\StringTok{ }\KeywordTok{order}\NormalTok{(freq, }\DataTypeTok{decreasing =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# Inspect most frequently occurring terms}
+\NormalTok{freq[}\KeywordTok{head}\NormalTok{(ord)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      free      read      book     story    little adventure 
+##         9         9         7         7         6         3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Inspect least frequently occurring terms}
+\NormalTok{freq[}\KeywordTok{tail}\NormalTok{(ord)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     much     open    stand    truly validate      way 
+##        1        1        1        1        1        1
+\end{verbatim}
+
+\hypertarget{terms-reduction}{%
+\subsubsection{Terms Reduction}\label{terms-reduction}}
+
+We can reduce the term in the DTM by specifying the following
+parameters:
+
+\begin{itemize}
+\tightlist
+\item
+  number of documents the word appears in the corpus: 2 to 8 documents
+\item
+  length of words: 4 to 20 characters
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Create document term matrix with term reduction}
+\CommentTok{# - Include only words that occur in 2-8 documents. }
+\CommentTok{# - enforce lower & upper limit to the length of words (4-20 characters)}
+\NormalTok{dtm.tr <-}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(}
+\NormalTok{  docs.lemma, }\DataTypeTok{control =} \KeywordTok{list}\NormalTok{(}
+    \DataTypeTok{wordLengths =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{20}\NormalTok{), }\DataTypeTok{bounds =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{global =} \KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{8}\NormalTok{))}
+\NormalTok{  )}
+\NormalTok{)}
+
+\NormalTok{dtm.tr}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 10, terms: 29)>>
+## Non-/sparse entries: 81/209
+## Sparsity           : 72%
+## Maximal term length: 12
+## Weighting          : term frequency (tf)
+\end{verbatim}
+
+\hypertarget{find-frequent-terms}{%
+\subsubsection{Find Frequent Terms}\label{find-frequent-terms}}
+
+Call function \texttt{findFreqTerm()}, then specify the DTM and filter
+by \texttt{lowfreq\ =\ 5} (the output shows only words with 5 or more
+occurrences in the corpus).
+
+Note that the results is sorted alphabetically, not by frequency.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Find frequent terms}
+\KeywordTok{findFreqTerms}\NormalTok{(dtm.tr, }\DataTypeTok{lowfreq =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "book"   "free"   "read"   "little" "story"
+\end{verbatim}
+
+\hypertarget{terms-correlation}{%
+\subsection{6-2: Terms Correlation}\label{terms-correlation}}
+
+\textbf{Correlation} is a quantitative measure of the co-occurrence of
+words in the corpus. The correlated terms can be identified by calling
+\texttt{findAssocs()} in \texttt{tm} package, then specify the term of
+interest and correlation limit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Find terms correlation}
+\KeywordTok{findAssocs}\NormalTok{(dtm.tr, }\StringTok{"read"}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $read
+##         free        aloud         next childrenâ\200\231s 
+##         0.80         0.79         0.79         0.51
+\end{verbatim}
+
+\hypertarget{example-calculation-of-correlation-score}{%
+\paragraph{Example calculation of correlation
+score}\label{example-calculation-of-correlation-score}}
+
+Pearson Correlation Coefficient is defined as follows:
+
+\[
+\def\numer{n\sum_{i=1}^{n}{x_i y_i} - \sum_{i=1}^{n}{x_i}\sum_{i=1}^{n}{y_i}}
+\newcommand{\denoms}[1]{\left(n\sum_{i=1}^{n}{{#1}_i^2} - \left(\sum_{i=1}^{n}{{#1}_i}\right)^2\right)}
+r = \frac{\numer}{\sqrt{\denoms{x}\denoms{y}}}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{trydata <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}
+  \StringTok{""}\NormalTok{, }\StringTok{"word1"}\NormalTok{, }\StringTok{"word1 word2"}\NormalTok{, }\StringTok{"word1 word2 word3"}\NormalTok{, }
+  \StringTok{"word1 word2 word3 word4"}\NormalTok{, }\StringTok{"word1 word2 word3 word4 word5"}
+\NormalTok{)}
+
+\NormalTok{trydtm <-}\StringTok{ }\KeywordTok{DocumentTermMatrix}\NormalTok{(}\KeywordTok{VCorpus}\NormalTok{(}\KeywordTok{VectorSource}\NormalTok{(trydata)))}
+\NormalTok{trydtm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## <<DocumentTermMatrix (documents: 6, terms: 5)>>
+## Non-/sparse entries: 15/15
+## Sparsity           : 50%
+## Maximal term length: 5
+## Weighting          : term frequency (tf)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{as.matrix}\NormalTok{(trydtm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Terms
+## Docs word1 word2 word3 word4 word5
+##    1     0     0     0     0     0
+##    2     1     0     0     0     0
+##    3     1     1     0     0     0
+##    4     1     1     1     0     0
+##    5     1     1     1     1     0
+##    6     1     1     1     1     1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{findAssocs}\NormalTok{(trydtm, }\StringTok{"word1"}\NormalTok{, }\FloatTok{0.0}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $word1
+## word2 word3 word4 word5 
+##  0.63  0.45  0.32  0.20
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{section-7-simple-graphics}{%
+\section{Section 7: Simple Graphics}\label{section-7-simple-graphics}}
+
+\hypertarget{histogram}{%
+\subsection{7-1: Histogram}\label{histogram}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{freq.tr <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(}\KeywordTok{as.matrix}\NormalTok{(dtm.tr))}
+
+\CommentTok{# Plot simple frequency histogram}
+\CommentTok{# Create a data frame (consists of name of the column)}
+\NormalTok{wordfreq <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
+  \DataTypeTok{term =} \KeywordTok{names}\NormalTok{(freq.tr), }\DataTypeTok{occurences =}\NormalTok{ freq.tr}
+\NormalTok{)}
+
+\CommentTok{# load ggplot2 package}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'ggplot2'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:NLP':
+## 
+##     annotate
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#invoke ggplot(plot only terms more than 3 times, label x and y-axis using aes)}
+\NormalTok{phisto<-}\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{subset}\NormalTok{(wordfreq, freq.tr}\OperatorTok{>}\DecValTok{3}\NormalTok{), }\KeywordTok{aes}\NormalTok{(term, occurences))}
+\CommentTok{#set the height of the bar using stat="bin" or "identity" ("identify" means the height is based on the data value mapped to y-axis)}
+\NormalTok{phisto<-phisto }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat=}\StringTok{"identity"}\NormalTok{)}
+\CommentTok{#specify that the x-axis text is at 45 degree angle and horizontally justified}
+\NormalTok{phisto<-phisto }\OperatorTok{+}\StringTok{ }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.text.x=}\KeywordTok{element_text}\NormalTok{(}\DataTypeTok{angle=}\DecValTok{45}\NormalTok{, }\DataTypeTok{hjust=}\DecValTok{1}\NormalTok{))}
+\CommentTok{#display histogram}
+\NormalTok{phisto}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{textminepipe_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\hypertarget{word-cloud}{%
+\subsection{7-2: Word Cloud}\label{word-cloud}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# load wordcloud package}
+\KeywordTok{library}\NormalTok{(wordcloud)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'wordcloud' was built under R version 3.6.3
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: RColorBrewer
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# setting the seed before each plot to ensure consistent look for clouds}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{32}\NormalTok{)}
+
+\CommentTok{# limit words by specifying min frequency}
+\KeywordTok{wordcloud}\NormalTok{(}\KeywordTok{names}\NormalTok{(freq.tr), freq.tr, }\DataTypeTok{min.freq =} \DecValTok{3}\NormalTok{, }\DataTypeTok{scale =} \KeywordTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{0.25}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{textminepipe_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# limit words by specifying min frequency (with color)}
+\KeywordTok{wordcloud}\NormalTok{(}\KeywordTok{names}\NormalTok{(freq.tr), freq.tr, }\DataTypeTok{min.freq =} \DecValTok{3}\NormalTok{, }\DataTypeTok{scale =} \KeywordTok{c}\NormalTok{(}\FloatTok{3.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{), }\DataTypeTok{colors =} \KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{6}\NormalTok{, }\StringTok{"Dark2"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{textminepipe_files/figure-latex/unnamed-chunk-25-2.pdf}
+
+\end{document}

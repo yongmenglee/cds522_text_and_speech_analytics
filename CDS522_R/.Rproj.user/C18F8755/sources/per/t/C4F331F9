@@ -7,14 +7,14 @@
     "folds" : "",
     "hash" : "356685696",
     "id" : "C4F331F9",
-    "lastKnownWriteTime" : 1603945627,
-    "last_content_update" : 1603945627009,
+    "lastKnownWriteTime" : 1603946084,
+    "last_content_update" : 1603946084852,
     "path" : "C:/Users/Darren Lee/Jupyter_Notebook/MS_DSA/CDS522_2021/CDS522_R/src/textminepipe.Rmd",
     "project_path" : "src/textminepipe.Rmd",
     "properties" : {
         "chunk_output_type" : "inline",
-        "cursorPosition" : "301,0",
-        "scrollLine" : "298",
+        "cursorPosition" : "6,0",
+        "scrollLine" : "0",
         "tempName" : "Untitled1"
     },
     "read_only" : false,
