@@ -1,0 +1,151 @@
+---
+title: "Text Mining Pipeline - N-gram"
+output: html_notebook
+---
+
+*A simple R project adapted for self-study purpose.*
+
+In this project, we perform analysis on a customer complaint dataset with N-gram language model using R.
+
+# Outline
+
+- Section 1: Load Packages
+- Section 2: Load Data
+- Section 3: Text Cleaning
+- Section 4: N-Gram Tokenization
+- Section 5: Graph Plotting for N-Gram
+
+# Section 1: Load Packages
+
+The R packages used in this project are listed below:
+
+- [`tm`](https://cran.r-project.org/web/packages/tm/index.html): a **text mining** package which provides many functions for text mining applications in R.
+- [`RWeka`](https://cran.r-project.org/web/packages/RWeka/index.html): provides machine learning algorithms for R applications.
+
+```{r}
+library(tm)
+library(RWeka)
+```
+
+***
+
+# Section 2: Load Data
+
+The dataset we use in this project is the [consumer complaint dataset](https://catalog.data.gov/dataset/consumer-complaint-database), which consists of 18 features (columns). For our purpose, we will only use a very small subset of the original dataset (199 records out of **3 million records from the original dataset!**)
+
+First, read the dataset from a CSV file into a data frame.
+
+```{r}
+#read data from csv into dataframe 
+# complaintData <- read.csv("C:/r/simpleTextMining/data/complaintFinance/consumer_complaint_200.csv")
+complaintData <- read.csv("../data/complaintFinance/consumer_complaint_200.csv")
+
+#use head function to inspect first 6 rows of data
+head(complaintData)
+```
+
+Next, read the data from data frame into `VCorpus`. Here, we use only the column: **Issue** from the data frame. Feel free to play around with other columns on you own. 
+
+Then, inspect the internal structure of the `VCorpus` by calling `str()`. Note that this function will print the internal structure for all 199 records by default. Therefore, we define `indices` which limits the function to print only the internal structure of first 3 records from `Vcorpus`. 
+
+```{r}
+#read data from dataframe into VCorpus 
+#Use xxx$Issue to read data from Issue column
+issueData <- VCorpus(VectorSource(complaintData$Issue))
+
+indices <- seq(1,3)
+str(issueData[indices])
+```
+
+There are more ways to inspect the data, as demonstrated below:
+```{r}
+#view summary of corpus information
+summary(issueData[indices])
+
+#inspect data for all records
+inspect(issueData[indices])
+
+#inspect a particular document (e.g. the 1st doc)
+writeLines(as.character(issueData[[1]]))
+```
+
+***
+
+# Section 3: Text Cleaning
+
+Perform some transformations and pre-processing on the original text. The steps are demonstrated as follows.
+
+```{r}
+#remove stopwords using the standard list in tm
+issueData <- tm_map(issueData, removeWords, stopwords("english"))
+
+#apply removePunctuation in corpus
+issueData <- tm_map(issueData, removePunctuation)
+
+#convert corpus to lower case
+issueData <- tm_map(issueData, content_transformer(tolower))
+
+#remove digits in corpus
+issueData <- tm_map(issueData, removeNumbers)
+
+#remove whitespace (optional to remove extra whitespace)
+issueData <- tm_map(issueData, stripWhitespace)
+```
+
+***
+
+# Section 4: N-Gram Tokenization
+
+In this section, we create **trigram** tokenizer and use it to create a **term document matrix**.
+
+```{r}
+#create Trigram Tokenizer
+TrigramTokenizer <- function(x) RWeka::NGramTokenizer(x, RWeka::Weka_control(min = 3, max = 3))
+
+#create term document matrix using ngram tokenizer  
+tdmIssue <- TermDocumentMatrix(issueData, control = list(tokenize = TrigramTokenizer)) # create tdm from n-grams
+
+#inspect summary of term document matrix
+tdmIssue
+```
+
+Then, get the frequent trigram terms (which appears at least 5 times in the term document matrix).
+
+```{r}
+#get frequent trigram terms (e.g. 5)
+tdmIssue.freqtrigram <- findFreqTerms(tdmIssue,lowfreq = 5)       
+
+tdmIssue.freqtrigram
+```
+
+***
+
+# Section 5: Graph Plotting for N-Gram
+
+We can manipulate the term document matrix to obtain the frequency of all trigrams generated in previous section.
+```{r}
+IssueTrigramfreq <- rowSums(as.matrix(tdmIssue[tdmIssue.freqtrigram,]))
+IssueTrigramfreq <- data.frame(word = names(IssueTrigramfreq), frequency = IssueTrigramfreq)
+
+#check the first n items 
+head(IssueTrigramfreq)
+```
+
+Finally, create a histogram to visualize the trigram in order (from the most frequent to the least frequent).
+
+```{r}
+#create the graph plotting fucntion 
+
+plotthegraph <- function(data,title,num){
+  df <- data[order(-data$frequency),][1:num,]
+  barplot(df[1:num,]$freq, las = 2, names.arg = df[1:num,]$word,
+          col ="darkblue", main = title,
+          ylab = "Frequencies",cex.axis = 0.8)
+}
+
+par(mar=c(10,4,4,2))
+
+#plot the graph for Trigram 
+plotthegraph(IssueTrigramfreq,"Trigrams",20)
+```
+
